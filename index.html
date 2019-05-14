@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Document</title>
+  <title>Parallax Scrolling</title>
 </head>
 <style>
   body {
@@ -16,7 +16,7 @@
   }
   .contents {
       margin-top: 15em;
-      height:1500px;
+      height: 1500px;
   }
   .box {
       width: 50px;
@@ -44,14 +44,14 @@
 </body>
 <script src="js/TweenMax.min.js" ></script>
 <script>
-  var scroll_position = 0;
-  var last_known_scroll_position = 0;
-  var difference = 0;
-  var ticking = false;
-  function doSomething(scroll_pos) {
-    console.log(scroll_pos);
+  let scroll_position = 0;
+  let last_known_scroll_position = 0;
+  let difference = 0;
+  let ticking = false;
+  function scrollMove(scroll_pos) {
+    // console.log(scroll_pos);
     difference = difference - scroll_pos;
-    console.log('difference' + difference);
+    // console.log('difference' + difference);
     if (scroll_pos < 500) {
       new TweenMax('.green', 0, {
           y: scroll_pos * 1,
@@ -66,26 +66,27 @@
           ease: Linear.easeNone,
       });
     } else {
-      new TweenMax('.green', 1, {
+      new TweenMax('.green', 0, {
           y: 500,
           ease: Linear.easeNone,
       });
-      new TweenMax('.red', 1, {
+      new TweenMax('.red', 0, {
           y: 450,
           ease: Linear.easeNone,
       });
-      new TweenMax(".yellow", 1, {
+      new TweenMax(".yellow", 0, {
           y: 350,
           ease: Linear.easeNone,
       });
     }
     difference = scroll_pos;
   }
+  // 捲動事件
   window.addEventListener('scroll', function(e) {
     scroll_position = window.scrollY;
     if (!ticking) {
       window.requestAnimationFrame(function() {
-        doSomething(scroll_position);
+        scrollMove(scroll_position);
         ticking = false;
       });
     }
