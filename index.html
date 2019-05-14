@@ -15,8 +15,8 @@
       text-align: center;
   }
   .contents {
-      margin-top: 10em;
-      height:800px;
+      margin-top: 15em;
+      height:1500px;
   }
   .box {
       width: 50px;
@@ -51,7 +51,7 @@
   function doSomething(scroll_pos) {
     console.log(scroll_pos);
     difference = difference - scroll_pos;
-    console.log('difference'+difference);
+    console.log('difference' + difference);
     if (scroll_pos < 500) {
       new TweenMax('.green', 0, {
           y: scroll_pos * 1,
@@ -61,8 +61,8 @@
           y: scroll_pos * 0.9,
           ease: Linear.easeNone,
       });
-      new TweenMax.to(".yellow", 0, {
-          y: scroll_pos * 0.8,
+      new TweenMax(".yellow", 0, {
+          y: scroll_pos * 0.7,
           ease: Linear.easeNone,
       });
     } else {
@@ -74,8 +74,8 @@
           y: 450,
           ease: Linear.easeNone,
       });
-      new TweenMax.to(".yellow", 1, {
-          y: 400,
+      new TweenMax(".yellow", 1, {
+          y: 350,
           ease: Linear.easeNone,
       });
     }
