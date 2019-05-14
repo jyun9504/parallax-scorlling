@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<style>
+  body {
+      background: #f8f8f8;
+      color: #000;
+      margin: 0 10px;
+      padding: 0;
+      text-align: center;
+  }
+  .contents {
+      margin-top: 10em;
+      height:800px;
+  }
+  .box {
+      width: 50px;
+      height: 50px;
+      border-radius: 6px;
+      margin-top: 4px;
+      display: inline-block;
+  }
+  .green {
+      background-color: #6fb936;
+  }
+  .red {
+      background-color: red;
+  }
+  .yellow{
+      background-color: yellow;
+  }
+</style>
+<body>
+  <div class="contents" id="contents">
+    <div class="box green"></div>
+    <div class="box red"></div>
+    <div class="box yellow"></div>
+  </div>
+</body>
+<script src="js/TweenMax.min.js" ></script>
+<script>
+  var scroll_position = 0;
+  var last_known_scroll_position = 0;
+  var difference = 0;
+  var ticking = false;
+  function doSomething(scroll_pos) {
+    console.log(scroll_pos);
+    difference = difference - scroll_pos;
+    console.log('difference'+difference);
+    if (scroll_pos < 500) {
+      new TweenMax('.green', 0, {
+          y: scroll_pos * 1,
+          ease: Linear.easeNone,
+      });
+      new TweenMax('.red', 0, {
+          y: scroll_pos * 0.9,
+          ease: Linear.easeNone,
+      });
+      new TweenMax.to(".yellow", 0, {
+          y: scroll_pos * 0.8,
+          ease: Linear.easeNone,
+      });
+    } else {
+      new TweenMax('.green', 1, {
+          y: 500,
+          ease: Linear.easeNone,
+      });
+      new TweenMax('.red', 1, {
+          y: 450,
+          ease: Linear.easeNone,
+      });
+      new TweenMax.to(".yellow", 1, {
+          y: 400,
+          ease: Linear.easeNone,
+      });
+    }
+    difference = scroll_pos;
+  }
+  window.addEventListener('scroll', function(e) {
+    scroll_position = window.scrollY;
+    if (!ticking) {
+      window.requestAnimationFrame(function() {
+        doSomething(scroll_position);
+        ticking = false;
+      });
+    }
+    ticking = true;
+  });
+</script>
+</html>
